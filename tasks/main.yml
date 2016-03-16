@@ -1,0 +1,41 @@
+---
+# tasks file for spnx-srv
+- name: Install software
+  apt: pkg={{ item }} state=installed
+  with_items: software_list
+
+- name: Copy specific mysql config
+  copy: src=spnx_mysql.cnf dest=/etc/mysql/conf.d/
+  notify: MySQL restart
+
+- name: Create DBs
+  mysql_db:
+    name={{ item }}
+    state=present
+  with_items:
+    - "tc-db-log"
+    - "tc-db-main"
+
+- name: Create MySQL user
+  mysql_user:
+    name={{ spnx_mysql_user }}
+    password={{ spnx_mysql_password }}
+    priv={{ item }}.*:ALL state=present
+    host="%"
+    append_privs=yes
+  with_items:
+  - "tc-db-log"
+  - "tc-db-main"
+
+- name: Copy HASP driver
+  get_url: url={{ hasp_drv_url }} dest=/var/local
+
+- name: Install HASP driver
+  apt: deb="/var/local/aksusbd_7.32-1_i386.deb"
+
+- name: Copy Sphinx server
+  get_url: url={{ spnx_server_url }} dest=/var/local
+
+- name: Install Sphinx server
+  apt: deb="/var/local/spnxserver_1.0.56.1-0_i386.deb"
+

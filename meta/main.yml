@@ -1,0 +1,21 @@
+galaxy_info:
+  author: Ivan Zharenkov
+  description: Install Sphinx server
+  company: PJSC KUZNETSOV
+  
+  license: MIT
+  
+  min_ansible_version: 1.3
+
+  platforms:
+  - name: Debian
+    versions:
+    - wheezy
+  
+  galaxy_tags:
+  - monitoring
+  - networking
+
+dependencies:
+- ivn86.spnx-cln
+  

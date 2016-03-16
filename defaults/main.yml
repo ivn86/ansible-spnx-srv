@@ -1,0 +1,12 @@
+---
+# defaults file for spnx-srv
+spnx_server_url: "http://spnx.ru/dl/spnxserver_1.0.56.1-0_i386.deb"
+hasp_drv_url: "http://spnx.ru/dl/aksusbd_7.32-1_i386.deb"
+
+software_list:
+- mysql-server
+- python-mysqldb
+
+spnx_mysql_user: "spnx"
+spnx_mysql_password: "spnx"
+

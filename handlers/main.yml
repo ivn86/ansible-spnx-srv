@@ -1,0 +1,4 @@
+---
+# handlers file for spnx-srv
+- name: MySQL restart
+  service: name=mysql state=restarted
